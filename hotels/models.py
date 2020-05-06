@@ -5,6 +5,7 @@ from django_mysql.models import ListCharField
 
 class City(models.Model):
     city = models.CharField(max_length=50)
+    created = models.DateTimeField(auto_now=True)
     
     @staticmethod
     def find_city(city):
@@ -16,6 +17,7 @@ class City(models.Model):
 
 class VendorType(models.Model):
     vendor_type = models.CharField(max_length=100)
+    created = models.DateTimeField(auto_now=True)
     
     def __str__(self):
         return self.vendor_type
