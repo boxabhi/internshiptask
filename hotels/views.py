@@ -26,15 +26,6 @@ def index(request):
     return JsonResponse(results)
 
 
-def cities(request):
-    cities = City()
-    result = cities.serialize()
-    return JsonResponse(result)
-
-def venues(request):
-    venues = VendorType()
-    result = venues.serialize()
-    return JsonResponse(result)
 
 
 def detail(request, id):

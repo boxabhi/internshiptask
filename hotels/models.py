@@ -37,6 +37,7 @@ class VendorType(models.Model):
     class Meta:
         ordering = ['vendor_type']
         
+   # Serialization for Vendortype     
     def serialize(self):
         venues = VendorType.objects.all()
         result = []
@@ -77,6 +78,7 @@ class Hotels(models.Model):
         return param != '' and param is not None
     
 
+    # Method for searching and seralizeHotel
     def all_hotels(self, city , vegprice , nonvegprice , venue , capacity):
         results = {}
        
