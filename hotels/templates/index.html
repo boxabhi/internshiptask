@@ -124,12 +124,12 @@
 
             <div class="row mt-5 mx-auto">
 
-                <div class="col-lg-4 mt-3" v-for="hotel in hotels">
-                    <div class="card shadow-lg" style="width: 18rem;">
+                <div class="col-lg-4 mt-3" v-for="hotel in hotels" >
+                    <div class="card shadow-lg" style="width: 18rem; height: 400px;">
                         <img src="https://www.abadhotels.com/wp-content/uploads/abad-plaza-banner.jpg"
                             class="card-img-top" alt="...">
                         <div class="card-body">
-                            <a href="/" >
+                            <a href="/detail/[[hotel.id]]">
                                 <h5 class="card-title h5 text-dark">[[hotel.hotel]]</h5>
                             </a>
 
