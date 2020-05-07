@@ -6,16 +6,15 @@ from django.http import JsonResponse
 
 
 def home(request):
-    hotels = Hotels.objects.all()
+    venues = VendorType.objects.all()
     cities = City.objects.all()
     context = {
-        'hotels': hotels,
+        'venues': venues,
          'cities' : cities
     }
-    return render(request,'index.html')
+    return render(request,'index.html', context)
 
 def index(request):
-    results = {}
     city = request.GET.get('city', '')
     vegprice = request.GET.get('vegprice',None)
     nonvegprice = request.GET.get('nonvegprice',None)
@@ -25,32 +24,17 @@ def index(request):
     hotels = Hotels()
     results = hotels.all_hotels(city,vegprice,nonvegprice,venue,capacity)
     return JsonResponse(results)
-    
-    # if request.method == 'GET':
-    #     city = request.GET.get('city')
-    #     if city is not None:
-    #         hotels = Hotels.objects.filter(city=city).all()
-    #     else:
-    #         hotels = Hotels.objects.all()
-    #     paginator = Paginator(hotels , 9)
-    #     page_number = request.GET.get('page')
-    #     page_obj = paginator.get_page(page_number)
-    #     print(city)
-    # else:
-    #     hotels = Hotels.objects.all()
-    #     paginator = Paginator(hotels , 9)
-    #     page_number = request.GET.get('page')
-    #     page_obj = paginator.get_page(page_number)
-        
-    # cities = City.objects.all()
-    # venues = VendorType.objects.all()
-    # context = {
-    #     'cities': cities,
-    #     'venues': venues,
-    #     'page_obj': page_obj
-    # }
-    
-    # return render(request, 'index.html' ,context)
+
+
+def cities(request):
+    cities = City()
+    result = cities.serialize()
+    return JsonResponse(result)
+
+def venues(request):
+    venues = VendorType()
+    result = venues.serialize()
+    return JsonResponse(result)
 
 
 def detail(request, id):

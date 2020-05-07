@@ -12,6 +12,18 @@ class City(models.Model):
         city = City.objects.filter(city = city).first()
         return city.city
     
+    def serialize(self):
+        cities = City.objects.all()
+        print(cities)
+        result = []
+        for city in cities:
+            result.append(city.city)
+        response = {}
+        response['cities'] = result
+        
+        return response
+            
+    
     def __str__(self):
         return self.city
 
@@ -24,6 +36,16 @@ class VendorType(models.Model):
     
     class Meta:
         ordering = ['vendor_type']
+        
+    def serialize(self):
+        venues = VendorType.objects.all()
+        result = []
+        for venue in venues:
+            result.append(venue.vendor_type)
+        response = {}
+        response['venues'] = result
+        
+        return response
         
         
 class Hotels(models.Model):
@@ -45,10 +67,10 @@ class Hotels(models.Model):
         return self.vendor_name
     
     
-    def serialize(self,vendor_type):
-        vendor = VendorType.objects.filter(vendor_type=vendor_type).first()
-        result = {}
-        result[vendor.id] = vendor.vendor_type
+    def serialize(self,vendor_types):
+        result = []
+        for vendor in vendor_types:
+            result.append(vendor.vendor_type)
         return result
     
     def is_valid_queryparam(param):
@@ -97,7 +119,7 @@ class Hotels(models.Model):
                 'start' : self.minimum[0],
                 'end'   : self.minimum[1]
             },
-            'vendor_type' : [self.serialize(v_type.vendor_type) for v_type in  list(self.vendor_type.all())],
+            'vendor_type' : self.serialize(list(self.vendor_type.all())) ,
             'phone' : self.phone,
             'highlights' : self.highlights,
             'about' : self.about,
