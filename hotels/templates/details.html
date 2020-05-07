@@ -20,8 +20,12 @@
 
         <h2 class="text-center mb-5">Hotel Detail </h2>
 
-        <h4>{{hotel.hotel}} | <button class="btn btn-info">{{hotel.city}}</button></h4>
+        <h4>{{hotel.vendor_name}} | <button class="btn btn-info">{{hotel.city}}</button></h4>
         <p class="text-justify mt-3">{{hotel.highlights}}</p>
+
+        <h5>About</h5>
+        <p class="text-justify mt-3">{{hotel.about}}</p>
+        
 
         <h4>Hotel information</h4>
         <p> {{hotel.address}}</p>
@@ -36,14 +40,7 @@
         <h6>Address</h6>
         <p>{{hotel.address}}</p>
 
-        <h5 class="text-muted">Venue Type</h5>
-        {% for venue in hotel.vendor_type %}
-        <button class="btn btn-dark">{{venue}} </button>
-        {% endfor %}
-
-
-
-        <br>
+       
 
 
         <a class="btn btn-primary mt-5" href="/">Back</a>
@@ -64,6 +61,30 @@
 
 
 
+            <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+            <script>
+                new Vue({
+                    delimiters: ['[[', ']]'],
+                    el: '#app',
+                    data: {
+                        loading : true,
+                        title: 'Welcome to My Journal',
+                       
+                    },
+                    methods: {
+                        
+                    }
+        
+        
+                    
+                   
+        
+                })
+            </script>
+        
 
 
 

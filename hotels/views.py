@@ -32,7 +32,9 @@ def info(request,id):
         hotel = Hotels.objects.get(id=id)
     except Hotels.DoesNotExist:
         hotel = None
-    return  render(request,'detail.html')
+    context = {'hotel': hotel}
+    
+    return  render(request,'details.html', context)
 
 def detail(request, id):
     try:
