@@ -27,6 +27,12 @@ def index(request):
 
 
 
+def info(request,id):
+    try:
+        hotel = Hotels.objects.get(id=id)
+    except Hotels.DoesNotExist:
+        hotel = None
+    return return render(request,'detail.html')
 
 def detail(request, id):
     try:
