@@ -6,6 +6,12 @@ from django.http import JsonResponse
 
 
 def home(request):
+    hotels = Hotels.objects.all()
+    cities = City.objects.all()
+    context = {
+        'hotels': hotels,
+         'cities' : cities
+    }
     return render(request,'index.html')
 
 def index(request):
