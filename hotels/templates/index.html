@@ -107,6 +107,8 @@
 
 
         <div class="container">
+            <h3 class="text-center mt-5" v-if="empty">No hotels Found</h3>
+
 
 
             <div class="d-flex text-success justify-content-center" v-if="loading">
@@ -117,30 +119,23 @@
 
 
 
-              <h3 class="text-center mt-5" v-if="hotels.length == 0">No hotels Found</h3>
+           
 
 
-
-
-            <div class="row mt-5 mx-auto">
+            <div class="row mt-5 mx-auto" else>
 
                 <div class="col-lg-4 mt-3" v-for="hotel in hotels" >
                     <div class="card shadow-lg" style="width: 18rem; height: 400px;">
                         <img src="https://www.abadhotels.com/wp-content/uploads/abad-plaza-banner.jpg"
                             class="card-img-top" alt="...">
                         <div class="card-body">
-                            <a href="/detail/[[hotel.id]]">
+                            <a :href="'/detail/'+hotel.id">
                                 <h5 class="card-title h5 text-dark">[[hotel.hotel]]</h5>
                             </a>
 
                             <p class="card-text m-0 p-0">[[hotel.city]]</p>
 
-
-
                             <span class="badge badge-success p-1 mr-1" v-for="vendor in hotel.vendor_type">[[vendor]]</span>
-
-
-
 
                             <p class="m-0 p-0">Veg Price - [[hotel.veg_price]]</p>
                             <p class="m-0 p-0">No Veg Price - [[hotel.non_veg_price]]</p>
@@ -220,11 +215,12 @@
                 city: "",
                 nonvegprice : "",
                 vegprice :"",
-                venue : ""
+                venue : "",
+                empty : false
             },
             methods: {
                 getHotels: function () {
-                    fetch('http://127.0.0.1:8000/result')
+                    fetch('/result')
                         .then(results => results.json())
                         .then(response => {
                           
@@ -235,15 +231,9 @@
                     this.loading = false
                 },
             
-                getCities : function(){
-                    fetch('/cities')
-                    .then(results => results.json())
-                    .then(response => {
-                      
-                        this.cities = response.cities
-                    })
-                },
+                
             onChange(event) {
+                loading = true
 
                 var city = this.city
                 var vegprice = this.vegprice
@@ -256,6 +246,8 @@
                 .then(response => {
                     console.log(response)
                     this.hotels = response
+                    
+                   loading = false
                 })
 
 
@@ -266,9 +258,9 @@
 
             },
             mounted() {
-                this.getHotels(),
-                this.getCities()
-            },
+                this.getHotels()
+               
+            }
 
         })
     </script>
